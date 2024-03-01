@@ -40,6 +40,12 @@ class StaticMenu extends ComponentBase
                 'title'       => 'rainlab.pages::lang.component.static_menu_code_name',
                 'description' => 'rainlab.pages::lang.component.static_menu_code_description',
                 'type'        => 'dropdown'
+            ],
+            'viewPath' => [
+                'title' => 'rainlab.pages::lang.component.static_menu_viewpath_name',
+                'description' => 'rainlab.pages::lang.component.static_menu_viewpath_description',
+                'type' => 'string',
+                'default' => ''
             ]
         ];
     }
@@ -63,6 +69,13 @@ class StaticMenu extends ComponentBase
         $this->page['menuItems'] = $this->menuItems();
     }
 
+    public function onRender(){
+        if (strlen($this->property('viewPath'))) {
+            // Définissez le chemin de la vue
+            return $this->renderPartial($this->property('viewPath'));
+        }
+    }
+    
     public function menuItems()
     {
         if ($this->menuItems !== null) {
